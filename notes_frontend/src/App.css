@@ -1,14 +1,300 @@
 /* CSS Variables for Theme Management */
 :root {
-  /* Light theme colors */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8f9fa;
-  --text-primary: #282c34;
-  --text-secondary: #61dafb;
-  --border-color: #e9ecef;
-  --button-bg: #007bff;
-  --button-text: #ffffff;
+  /* Light Theme - injected custom palette */
+  --primary: #1976d2;
+  --secondary: #424242;
+  --accent: #ff4081;
+  --bg-main: #f9fafc;
+  --bg-note: #fff;
+  --header-bg: #1976d2;
+  --header-text: #fff;
+  --note-title: #222C3B;
+  --note-content: #424242;
+  --border: #e0e0e0;
+  --shadow: 0 2px 8px rgba(33,50,87, 0.07);
+  --modal-bg: rgba(40,44,52, 0.14);
 }
+
+/* Modern notes-app global structure */
+.notes-app {
+  min-height: 100vh;
+  box-sizing: border-box;
+  background: var(--bg-main);
+  font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  color: var(--secondary);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--primary);
+  padding: 0 1.5rem;
+  height: 64px;
+  box-shadow: var(--shadow);
+  color: var(--header-text);
+}
+.header-left {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+.header-middle {
+  flex: 1;
+  margin: 0 1rem;
+  display: flex;
+  align-items: center;
+}
+.header-right {
+  display: flex;
+  align-items: center;
+}
+.app-title {
+  color: var(--header-text);
+  letter-spacing: 1px;
+}
+
+/* Button styles */
+.btn, .icon-btn {
+  display: inline-flex;
+  align-items: center;
+  border: none;
+  border-radius: 5px;
+  padding: 0.45rem 1.1rem;
+  margin: 0 0.2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: box-shadow .17s, transform .14s;
+  outline: none;
+  background: var(--primary);
+  color: #fff;
+  box-shadow: 0 0.5px 1px rgba(60,60,60,0.04);
+}
+.btn.accent {
+  background: var(--accent);
+}
+.btn.secondary {
+  background: var(--secondary);
+}
+.btn:active, .icon-btn:active {
+  transform: scale(0.98);
+}
+.btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+.icon-btn {
+  padding: 0.3rem 0.6rem;
+  background: #ececec;
+  color: var(--secondary);
+  border-radius: 3px;
+  font-size: 1.1rem;
+  margin-left: 3px;
+  margin-right: 0;
+}
+
+.icon-btn.danger {
+  color: #fff;
+  background: var(--accent);
+}
+.icon-btn:hover:not(:disabled), 
+.btn:hover:not(:disabled) {
+  opacity: 0.89;
+  box-shadow: 0 2px 8px rgba(33,50,87, 0.12);
+}
+
+/* Search input */
+.search-bar {
+  width: 270px;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1.5px solid var(--border);
+  background: #fff;
+  color: var(--note-title);
+  font-size: 1rem;
+  outline: none;
+  margin-left: 0.7rem;
+  margin-right: 0.7rem;
+  transition: border 0.18s;
+}
+.search-bar:focus {
+  border: 1.5px solid var(--primary);
+}
+
+/* Notes layout */
+.notes-main {
+  flex: 1;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1rem 3rem 1rem;
+}
+
+.notes-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  justify-content: flex-start;
+}
+.note-card {
+  background: var(--bg-note);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  border: 1.2px solid var(--border);
+  padding: 1.2rem 1.1rem 1rem 1.1rem;
+  min-width: 240px;
+  max-width: 320px;
+  flex: 1 1 270px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.2rem;
+  position: relative;
+  overflow-wrap: anywhere;
+  transition: box-shadow 0.14s;
+}
+.note-card:hover {
+  box-shadow: 0 2px 18px rgba(33,50,87, 0.14);
+}
+.note-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.92rem;
+  color: var(--secondary);
+  margin-bottom: 0.29rem;
+}
+.note-date {
+  color: #62718f;
+  font-size: 0.87rem;
+}
+.note-title {
+  font-size: 1.16rem;
+  font-weight: 600;
+  color: var(--note-title);
+  margin-bottom: 0.4rem;
+  padding-top: 3px;
+}
+.note-body {
+  font-size: 1.02rem;
+  color: var(--note-content);
+  margin-top: 0.12rem;
+  line-height: 1.5;
+  min-height: 32px;
+  white-space: pre-line;
+}
+.empty-msg {
+  font-size: 1.2rem;
+  color: var(--secondary);
+  opacity: .7;
+  text-align: center;
+  margin-top: 2rem;
+}
+.status-msg {
+  font-size: 1.08rem;
+  padding: 1.6rem 0;
+  color: var(--primary);
+  text-align: center;
+}
+.status-msg.error {
+  color: var(--accent);
+}
+
+
+/* Modal styles */
+.modal-overlay {
+  background: var(--modal-bg);
+  position: fixed;
+  z-index: 40;
+  top:0;left:0;bottom:0;right:0;
+  width: 100vw;
+  height: 100vw;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal-content {
+  background: #fff;
+  max-width: 98vw;
+  width: 95vw;
+  max-width: 390px;
+  padding: 2.3rem 2rem 1.6rem 2rem;
+  border-radius: 13px;
+  box-shadow: 0 5px 32px rgba(42,60,87,0.19);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.modal-content h2 {
+  margin-bottom: 1rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+.input {
+  display: block;
+  width: 100%;
+  font-size: 1.1rem;
+  margin: 0.29rem 0 1rem 0;
+  border-radius: 6px;
+  border: 1.2px solid var(--border);
+  padding: 0.59rem;
+  background: #f7f9fc;
+  color: var(--note-title);
+  outline: none;
+  transition: border 0.14s;
+}
+.input:focus {
+  border: 1.2px solid var(--primary);
+  background: #fff;
+}
+textarea.input {
+  min-height: 93px;
+  font-size: 1.06rem;
+  resize: vertical;
+}
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;
+  margin-top: 1.2rem;
+}
+
+/* Responsive styles */
+@media (max-width: 700px) {
+  .header {
+    flex-direction: column;
+    padding-top: 16px;
+    padding-bottom: 17px;
+    height: auto;
+    gap: 14px;
+  }
+  .header-middle {
+    margin: 8px 0 8px 0;
+    width: 96vw;
+  }
+  .notes-main {
+    padding: 1rem 3vw 2rem 3vw;
+  }
+  .notes-list {
+    flex-direction: column;
+    gap: 0.96rem;
+    align-items: stretch;
+  }
+  .note-card {
+    min-width: unset;
+    max-width: 96vw;
+  }
+  .modal-content {
+    width: 99vw;
+    min-width: unset;
+    padding: 1.19rem 1.1rem;
+    font-size: 1rem;
+  }
+}
+
 
 [data-theme="dark"] {
   /* Dark theme colors */
